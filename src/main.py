@@ -1,3 +1,4 @@
+import os
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
@@ -13,6 +14,7 @@ if __name__ == "__main__":
     # Define paths
     train_dir = "/Users/michelangelozampieri/Desktop/TAMID-Group-New/data/sorted_data_output/train"
     test_dir = "/Users/michelangelozampieri/Desktop/TAMID-Group-New/data/sorted_data_output/test"
+    model_dir = "/Users/michelangelozampieri/Desktop/TAMID-Group-New/models"
 
     # Device configuration
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -67,7 +69,9 @@ if __name__ == "__main__":
 
     # --- Save and Predict ---
     # Save the model
-    torch.save(model.state_dict(), "resnet50_model.pth")
+    model_path = os.path.join(model_dir, "improved_resnet18.pth")
+    torch.save(model.state_dict(), model_path)
+    print(f"Model saved to {model_path}")
 
     # Predict an image
     image_path = "path_to_image.jpg"
